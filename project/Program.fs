@@ -104,8 +104,27 @@ type UserService(dbContext: AppDbContext) =
         dbContext.SaveChanges() |> ignore
         printfn "Movie added successfully!"
 
+        //////mariam//////
+    member this.AddSeat(row: int,column: int, movieId: int)=
+        let seat = Seat(Row=row,Column=column,MovieId = movieId)
+        dbContext.Add(seat) |> ignore
+        dbContext.SaveChanges() |>ignore
 
 
+    member this.GetMovieById(movieId: int)=
+        let movie = dbContext.Set<Movie>().FirstOrDefault( fun m -> m.Id =movieId)
+        Option.ofObj movie
+
+    member this.GetAllMovies()=
+        dbContext.Set<Movie>().ToList() |> List.ofSeq
+
+    member this.GetAllSeats(movieId: int)=
+        dbContext.Set<Seat>().ToList().Where( fun m -> m.MovieId=movieId) |> List.ofSeq
+
+    member this.GetSeat(movieId: int, row: int, column: int)=
+       let seat= dbContext.Set<Seat>().FirstOrDefault(fun m -> m.MovieId = movieId && m.Row= row && m.Column=column)
+       Option.ofObj seat
+       ///mariam////
 
 let optionsBuilder = DbContextOptionsBuilder<AppDbContext>()
 optionsBuilder.UseSqlServer("Data Source=ZENOO;Initial Catalog=PL3_Project;Integrated Security=True;Connect Timeout=30;Encrypt=False;
@@ -118,3 +137,68 @@ let userService = UserService(dbContext)
 // Add a new user
 //userService.AddUser("Alice", 1234567890, "password123", "alice")
 ////userService.AddMovie("awlad_rezk", DateOnly(2024, 12, 10))
+
+
+
+/////////////mariam///////
+
+
+
+//check if movie exist
+//let movieExist movieId =
+//    match userService.GetMovieById(movieId) with
+//    |Some movie -> movieId
+//    |None ->  0
+
+//adding seats
+//let movieid= movieExist 2
+//if movieid <> 0 then
+//    for i in 1..5 do
+//        for j in 1..8 do
+//            userService.AddSeat( i, j,movieid)
+//            printfn"seat added"
+//else
+//    printfn"error occured during add a seat"
+
+
+
+//display all movies
+let displayMovies =
+    let movies = userService.GetAllMovies()
+    if List.isEmpty movies then
+        []
+    else
+        movies |> List.map(fun m -> (m.Id,m.MovieName,m.Showtime))
+
+
+// display all seats
+let DisplaySeats movieId=
+    let seats = userService.GetAllSeats(movieId)
+    if (List.isEmpty seats) then
+        printfn"there is no seats for this movie"
+        []
+    else
+        let tupleOfSeats =  seats |> List.map(fun seat -> (seat.Row,seat.Column,seat.isAvailable))
+        tupleOfSeats
+    
+//DisplaySeats 2 |> List.iter (fun (row , column) -> printfn"row: %d , column:%d" row column)
+
+//check seat availabilty
+let checkAvailablity movieId row column=
+    let seat =userService.GetSeat(movieId,row,column)
+    match seat with
+    | Some Seat -> 
+         if Seat.isAvailable=true then
+            "this seat is available"
+         else
+            "this seat is reserved"
+    | None -> "there is no seat!"
+
+//checkAvailablity 2 1 1
+//login "alice" "password123"
+//signup "mostafa" 01128098800 "mostafa" "password123"
+
+//displayMovies
+
+
+//////////mariam//////////////

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\mostafa\\level 4\\PL3\\project\\zanon\\project\\project.fsproj": {}
+    "E:\\mostafa\\level 4\\PL3\\project\\mariam\\pl3_project\\project\\project.fsproj": {}
   },
   "projects": {
-    "E:\\mostafa\\level 4\\PL3\\project\\zanon\\project\\project.fsproj": {
+    "E:\\mostafa\\level 4\\PL3\\project\\mariam\\pl3_project\\project\\project.fsproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\mostafa\\level 4\\PL3\\project\\zanon\\project\\project.fsproj",
+        "projectUniqueName": "E:\\mostafa\\level 4\\PL3\\project\\mariam\\pl3_project\\project\\project.fsproj",
         "projectName": "project",
-        "projectPath": "E:\\mostafa\\level 4\\PL3\\project\\zanon\\project\\project.fsproj",
+        "projectPath": "E:\\mostafa\\level 4\\PL3\\project\\mariam\\pl3_project\\project\\project.fsproj",
         "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-        "outputPath": "E:\\mostafa\\level 4\\PL3\\project\\zanon\\project\\obj\\",
+        "outputPath": "E:\\mostafa\\level 4\\PL3\\project\\mariam\\pl3_project\\project\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

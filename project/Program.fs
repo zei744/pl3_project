@@ -139,6 +139,34 @@ let userService = UserService(dbContext)
 ////userService.AddMovie("awlad_rezk", DateOnly(2024, 12, 10))
 
 
+////////zaineb////////
+
+let login username password =
+    let user = userService.GetUserByCred(username, password)
+    match user with 
+    |Some user -> user.Name
+    |None -> ""
+
+
+//signup
+let signup name phonenumber username password=
+    if name = "" || username= "" || password = "" then
+        "please fill all fields"
+    else
+    let user = userService.GetUserByCred(username, password)
+    match user with 
+    |Some user -> "user exist"
+    |None ->  match userService.GetUserByName(name)  with
+                | Some user -> "this name exist before"
+                | None -> userService.AddUser(name,phonenumber,username,password)
+// Add a new user
+//userService.AddUser("Alice", 1234567890, "password123", "alice")
+////userService.AddMovie("awlad_rezk", DateOnly(2024, 12, 10))
+
+//login "alice" "password123"
+//signup "mostafa" 01128098800 "mostafa" "password123"
+
+/////zaineb/////
 
 /////////////mariam/////////
 
